@@ -1,0 +1,140 @@
+{% extends 'FaiancaBlogBundle::base.html.twig' %}
+
+{% block body %}
+
+<!-- Begin Content -->
+    <div id="blog-content" class="page-with-sidebar"> 
+    
+    <div id="blog-top">
+    <div class="search">
+      <form class="searchform" method="get">
+          <input type="text" id="s" name="s" value="type and hit enter" onfocus="this.value=''" onblur="this.value='type and hit enter'"/>
+      </form>
+    </div>
+    <div class="posts-control">
+     <a id="prev" href="{{ path('blog_index') }}">Back</a> 
+    </div>
+    <div class="clear"></div>
+    </div>
+      <!-- Begin Posts -->
+      <div id="drop">
+      
+      
+      	<!-- Begin Post -->
+      	<div class="post">
+      		<h1 class="title">{{ article.title }} </h1>
+      		<div class="meta">
+      			Posted on <span class="date">{{ article.dateCreated | date('d M Y') }}</span> by <a href="#">{{ article.author }}</a> in <a href="#">Web Design</a> | {{ article.comments | length}} Comments
+      		</div>
+      		<img src="{{ asset('style/images/art/blog-1.jpg') }}" alt="" />
+      		<p>
+                    {{ article.content }}
+                </p>
+
+      	</div>
+      	<!-- End Post -->
+      
+      	
+      <!-- Begin Comments -->
+      
+      <div id="comment-wrapper">
+        <h4>{{ article.comments | length}} Responses to "{{ article.title }}"</h4>
+        
+        <!-- Begin Comments -->
+        <div id="comments">
+          <ol id="singlecomments" class="commentlist">
+           {% for comment in article.comments %}  
+            <li class= "clearfix">
+              <div class="user">
+                 
+                      <img alt="" src="{{ asset('style/images/art/blog1-th.jpg') }}" height="60" width="60" class="avatar" />
+                 
+              </div>
+              <div class="message">
+                <div class="info">
+                  <h6><a href="#">{{ comment.name }}</a></h6>
+                  <span class="date">- {{ comment.createdAt | date('d M Y') }}</span> </div>
+                <p>{{ comment.message }}</p>
+              </div>
+              <div class="clear"></div>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+        <!-- End Comments --> 
+        
+        <!-- Begin Form -->
+        <div id="comment-form" class="comment-form">
+          <h4>Leave a Comment</h4>
+          <form id="ajax-contact-form" method="post" action="{{ path('comment_add', {'id': article.id }) }}">
+                {{ form_rest(form) }}
+            <div class="clear"></div>
+            <input id="submit-button" class="" type="submit" name="submit" value="Submit" />
+          </form>
+          <div class="clear"></div>
+        </div>
+        <!-- End Form --> 
+        
+      </div>
+      
+      <!-- End Comments --> 
+      	
+      </div>
+      <!-- End Posts -->
+      
+      <!-- Begin Sidebar -->
+      <div id="right-side">
+      
+      <div class="right-box">
+      <h4>Popular Posts</h4>
+      <ul class="list">
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog1-th.jpg')}}" alt="" /><span>Proin luctus adipiscing risus eget</span></a></li>
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog2-th.jpg')}}" alt="" /><span>Vestibulum a justo a sapien mollis</span></a></li>
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog3-th.jpg')}}" alt="" /><span>Donec quis metus id odio condimentum gravida</span></a></li>
+      </ul>
+      </div>
+      
+      <div class="right-box">
+      <h4>Archive</h4>
+      <ul class="list">
+        <li><a href="#">May 2011 (11)</a></li>
+      	<li><a href="#">April 2011 (21)</a></li>
+      	<li><a href="#">March 2011 (3)</a></li>
+      	<li><a href="#">February 2011 (5)</a></li>
+      	<li><a href="#">January 2011 (9)</a></li>	
+      </ul>
+      </div>
+      
+      <div class="right-box">
+      <h4>Tags</h4>
+      <ul class="tags">
+        <li><a href="#">Web</a></li>
+      	<li><a href="#">Photography</a></li>
+      	<li><a href="#">Fun</a></li>
+      	<li><a href="#">Illustation</a></li>
+      	<li><a href="#">Blog</a></li>
+      	<li><a href="#">Design</a></li>
+      	<li><a href="#">Inspiration</a></li>
+      	<li><a href="#">Manipulation</a></li>
+      	<li><a href="#">Graphic</a></li>
+      	<li><a href="#">Travel</a></li>
+      	<li><a href="#">Tips</a></li>	
+      </ul>
+      <div class="clear"></div>
+      </div>
+     
+      
+      <div class="right-box">
+      <h4>Twitter</h4>
+      <div id="twitter-wrapper">
+        <div id="twitter"></div>
+        <span class="username"><a href="javascript:if(confirm('http://twitter.com/elemisdesign\n\nThis file was not retrieved because it was filtered out by your project settings.\n\nWould you like to open it from the server?'))window.location='http://twitter.com/elemisdesign'">Follow @elemisdesign</a></span> </div>
+      </div>
+      
+      </div>
+      <!-- End Sidebar -->
+       
+    </div>
+    <!-- End Content --> 
+
+{% endblock %}

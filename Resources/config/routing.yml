@@ -1,0 +1,14 @@
+## Blog    
+blog_index:
+    pattern: /blog/{page}
+    defaults: { _controller: FaiancaBlogBundle:Blog:index, page: 1 }
+    requirements:
+        page:  \d+
+        
+blog_show:
+    pattern: /blog/{slug}
+    defaults: { _controller: FaiancaBlogBundle:Blog:show }
+    
+comment_add:
+    pattern: /comment/add/{id}
+    defaults: { _controller: FaiancaBlogBundle:Blog:addComment }

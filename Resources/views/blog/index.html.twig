@@ -1,0 +1,103 @@
+{% extends 'FaiancaSiteBundle::base.html.twig' %}
+{% block body %}
+
+<!-- Begin Content -->
+    <div id="blog-content" class="page-with-sidebar"> 
+    
+    <div id="blog-top">
+    <div class="search">
+      <form class="searchform" method="get">
+          <input type="text" id="s" name="s" value="type and hit enter" onfocus="this.value=''" onblur="this.value='type and hit enter'"/>
+      </form>
+    </div>
+    <div class="posts-control">
+     <a id="prev" href="#">Prev</a> 
+     <a id="next" href="#">Next</a> 
+    </div>
+
+    </div>
+      <!-- Begin Posts -->
+      <div id="drop">
+      
+      {% for article in pager.getResults %}
+      	<div class="post">
+      		<h1 class="title"><a href="{{ path('blog_show', {'slug': article.slug }) }}">{{ article.title }}</a></h1>
+      		<div class="meta">
+      			Posted on <span class="date">{{ article.dateCreated | date('d M Y')}}</span> by <a href="#">{{ article.author }}</a> in <a href="#">{{ article.category }}</a> | <a href="#">{{ article.comments | length }} Comments</a>
+      		</div>
+      		<a href="{{ path('blog_show', {'slug': article.slug }) }}"><img src="{{ asset('style/images/art/blog-1.jpg') }}" alt="" /></a>
+      		<p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Etiam sollicitudin tincidunt elit, eu convallis felis suscipit ut. Sed et nisl ut odio lacinia auctor. Nullam eu sagittis mauris. Donec non dolor ac elit aliquam tincidunt at at sapien. Aenean tortor libero, condimentum ac laoreet vitae, varius tempor nisi. Duis non arcu vel lectus.
+        </p>
+
+			<a href="{{ path('blog_show', {'slug': article.slug }) }}" class="button">Continue reading<span></span></a><div class="clear"></div>
+ 	</div>
+      {% endfor %}
+      
+      	
+      
+      	<!-- Begin Page Navigation -->
+      	<ul class="page-navi">
+      		{% if pager.isPaginable %}
+                  {{ paginate(pager, 'blog_index') }}
+              {% endif %}
+      	</ul>
+      	<!-- End Page Navigation -->
+      	
+      </div>
+      <!-- End Posts -->
+      
+      <!-- Begin Sidebar -->
+      <div id="right-side">
+      
+      <div class="right-box">
+      <h4>Popular Posts</h4>
+      <ul class="list">
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog1-th.jpg') }}" alt="" /><span>Proin luctus adipiscing risus eget</span></a></li>
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog2-th.jpg') }}" alt="" /><span>Vestibulum a justo a sapien mollis</span></a></li>
+      	<li><a href="#"><img src="{{ asset('style/images/art/blog3-th.jpg') }}" alt="" /><span>Donec quis metus id odio condimentum gravida</span></a></li>
+      </ul>
+      </div>
+      
+      <div class="right-box">
+      <h4>Archive</h4>
+      <ul class="list">
+        <li><a href="#">May 2011 (11)</a></li>
+      	<li><a href="#">April 2011 (21)</a></li>
+      	<li><a href="#">March 2011 (3)</a></li>
+      	<li><a href="#">February 2011 (5)</a></li>
+      	<li><a href="#">January 2011 (9)</a></li>	
+      </ul>
+      </div>
+      
+      <div class="right-box">
+      <h4>Tags</h4>
+      <ul class="tags">
+        <li><a href="#">Web</a></li>
+      	<li><a href="#">Photography</a></li>
+      	<li><a href="#">Fun</a></li>
+      	<li><a href="#">Illustation</a></li>
+      	<li><a href="#">Blog</a></li>
+      	<li><a href="#">Design</a></li>
+      	<li><a href="#">Inspiration</a></li>
+      	<li><a href="#">Manipulation</a></li>
+      	<li><a href="#">Graphic</a></li>
+      	<li><a href="#">Travel</a></li>
+      	<li><a href="#">Tips</a></li>	
+      </ul>
+      <div class="clear"></div>
+      </div>
+      
+     
+      <div class="right-box">
+      <h4>Twitter</h4>
+      <div id="twitter-wrapper">
+        <div id="twitter"></div>
+        <span class="username"><a href="javascript:if(confirm('http://twitter.com/elemisdesign\n\nThis file was not retrieved because it was filtered out by your project settings.\n\nWould you like to open it from the server?'))window.location='http://twitter.com/elemisdesign'">Follow @elemisdesign</a></span> </div>
+      </div>
+      
+      </div>
+      <!-- End Sidebar -->
+       
+    </div>
+    <!-- End Content --> 
+ {% endblock %}

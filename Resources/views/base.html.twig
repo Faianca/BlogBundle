@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jorge Meireles</title>
+        {% block stylesheets %}
+            <link href="{{ asset('style.css') }}" type="text/css" rel="stylesheet" />
+             <link href="{{ asset('style/css/colors/red.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('style/images/favicon.png') }} ">
+        <!--[if IE 7]>
+        <link rel="stylesheet" type="text/css" href="style/css/ie7.css" media="all" />
+        <![endif]-->
+        <!--[if IE 8]>
+        <link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all" />
+        <![endif]-->
+        <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all" />
+        <![endif]-->
+       
+{% javascripts '@FaiancaSiteBundle/Resources/public/style/js/*' %}
+        <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+        <script type="text/javascript">
+            $.fn.cycle.updateActivePagerLink = function(pager, currSlideIndex) {
+                $(pager).find('li').removeClass('activeLI')
+                .filter('li:eq('+currSlideIndex+')').addClass('activeLI');
+            };
+            $(function() {
+                $('#cycle-slider').cycle({
+                    fx:     'fade',
+                    speed:  'slow',
+                    timeout: 0,
+                    pause: 0,
+                    pager:  '#nav',
+                    cleartypeNoBg: true,
+                    pagerAnchorBuilder: function(idx, slide) {
+                        // return sel string for existing anchor
+                        return '#nav li:eq(' + (idx) + ') a';
+                    }
+                });
+            });
+        </script>
+    </head>
+<body class="home">
+        <!-- Begin Wrapper -->
+        <div id="wrapper"> 
+
+            <!-- Begin Left Side -->
+            <div id="left-side">
+                <div id="logo"><a href="/"><img src="{{ asset('style/images/logo.png') }}" alt="Jorge Meireles" /></a></div>
+
+                <!-- Begin Menu -->
+                <div id="menu" class="menu-v">
+                    {{ knp_menu_render('main', {'currentAsLink': false, 'compressed': true}) }}
+                </div>
+                <!-- End Menu -->
+
+                <div class="social">
+                    <ul>
+                        <li><a href="#"><img src="{{ asset('style/images/icon-rss.png') }}" alt="" /></a></li>
+                        <li><a href="#"><img src="{{ asset('style/images/icon-tw.png') }}" alt="" /></a></li>
+                        <li><a href="#"><img src="{{ asset('style/images/icon-db.png') }}" alt="" /></a></li>
+                        <li><a href="#"><img src="{{ asset('style/images/icon-fl.png') }}" alt="" /></a></li>
+                    </ul>
+                </div>
+
+                <span id="footer">&copy; 2011 Jorge Meireles</span>
+
+            </div>
+            <!-- End Left Side --> 
+
+            <!-- Begin Container -->
+            <div id="container"> 
+               
+                 {% block body %}
+                    
+                  {% endblock %}
+               
+            </div>
+            <!-- End Container -->
+
+        </div>
+        <div class="clear"></div>
+        <!-- End Wrapper -->
+        <!-- Demo Only -->
+    </body>
+</html>
