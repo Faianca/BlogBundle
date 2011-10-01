@@ -1,0 +1,39 @@
+Installation
+============
+
+* Add FaiancaBlogBundle to your src/Bundle dir::
+
+ [FaiancaBlogBundle]
+        git=git://github.com/faianca/BlogBundle.git
+        target=/bundles/Faianca/BlogBundle
+
+* Add FaiancaBlogBundle to your application kernel::
+
+    // app/AppKernel.php
+    public function registerBundles()
+    {
+        return array(
+            // ...
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Faianca\BlogBundle\FaiancaBlogBundle()
+            // ...
+        );
+    }
+
+* Add Faianca to your namespace
+
+    $loader->registerNamespaces(array(
+        // ...
+        'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
+        'Sensio'           => __DIR__.'/../vendor/bundles',
+        'Faianca' => __DIR__.'/../vendor/bundles',
+    ));
+
+
+* Add FaiancaBlogBundle routes to your application routing.yml::
+
+    # app/config/routing.yml
+    FaiancaBlogBundle:
+            resource: "@FaiancaBlogBundle/Resources/config/routing.yml"
+            prefix:   /
